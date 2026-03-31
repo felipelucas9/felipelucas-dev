@@ -1,0 +1,44 @@
+---
+import Container from "../ui/Container.astro";
+import logo from "../../assets/logo-felipelucasdev-neg.svg";
+
+import { Mail, Linkedin, MessageCircleMore } from "lucide-astro";
+
+const { t, lang } = Astro.props;
+---
+
+<footer
+  class="bg-[var(--color-primary)] pt-40 pb-10 md:pt-28 lg:pt-28 text-white"
+>
+  <Container>
+    <div
+      class="reveal reveal-delay-3 flex flex-col items-center text-center text-white"
+    >
+      <!-- LOGO -->
+      <img src={logo.src} alt="Felipe Lucas Dev" class="h-12 w-auto" />
+
+      <!-- TAGLINE -->
+      <p class="mt-4 text-sm">{t.footer.tagline}</p>
+
+      <!-- SOCIAL -->
+      <div class="mt-6 flex items-center gap-6">
+        <a href="#" class="footer-icon" aria-label="Email">
+          <Mail size={18} />
+        </a>
+
+        <a href="#" class="footer-icon" aria-label="LinkedIn">
+          <Linkedin size={18} />
+        </a>
+
+        <a href="#" class="footer-icon" aria-label="Whatsapp">
+          <MessageCircleMore size={18} />
+        </a>
+      </div>
+
+      <!-- COPYRIGHT -->
+      <p class="mt-8 text-xs text-white/70">
+        {t.footer.copyright}
+      </p>
+    </div>
+  </Container>
+</footer>

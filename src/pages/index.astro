@@ -1,17 +1,17 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/sections/Header.astro";
+import PageContent from "../components/PageContent.astro";
+import ContactFormPanel from "../components/ContactFormPanel.astro";
 
+import en from "../data/i18n/en";
+
+const lang = "en";
+const t = en;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Header t={t} lang={lang} />
+  <PageContent t={t} />
+  <ContactFormPanel t={t} />
+</BaseLayout>

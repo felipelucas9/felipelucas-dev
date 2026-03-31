@@ -1,0 +1,61 @@
+---
+import Container from "../ui/Container.astro";
+import avatar from "../../assets/felipelucas-avatar.webp";
+
+const { t, lang } = Astro.props;
+---
+
+<section class="relative overflow-visible pt-24 pb-32">
+  <Container>
+    <div class="reveal mx-auto max-w-4xl text-center">
+      <p
+        class="reveal reveal-delay-1 mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-text)]"
+      >
+        {t.hero.eyebrow}
+      </p>
+      <h1
+        class="reveal reveal-delay-2 text-4xl font-bold leading-tight text-[var(--color-text-title)] sm:text-5xl lg:text-6xl"
+      >
+        {t.hero.title}
+      </h1>
+
+      <h2
+        class="reveal reveal-delay-3 mt-6 mb-10 text-lg leading-8 text-[var(--color-text)]"
+      >
+        {t.hero.description}
+      </h2>
+
+      <div
+        class="reveal reveal-delay-3 mt-8 flex flex-wrap justify-center gap-4"
+      >
+        <button
+          type="button"
+          class="inline-block rounded-full border-2 border-[var(--color-accent)] px-5 py-2 text-sm font-medium text-[var(--color-accent)] transition duration-300 ease-out hover:-translate-y-0.5 hover:bg-[var(--color-accent)] hover:text-white hover:shadow-lg data-contact-open"
+          data-contact-open
+        >
+          {t.hero.cta}
+        </button>
+      </div>
+
+      <div
+        class="mt-16 min-h-[260px] rounded-3x1 border border-dashed border-slate-300 bg-slate-50/60"
+      >
+      </div>
+    </div>
+  </Container>
+
+  <!-- AVATAR -->
+  <div
+    class="reveal absolute left-1/2 bottom-0 z-10 -translate-x-1/2 translate-y-1/2"
+  >
+    <div
+      class="flex h-40 w-40 overflow-hidden rounded-full border-3 border-white shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition duration-300 ease-out hover:-translate-y-1 hover:rotate-4 hover:shadow-xl hover:scale-125 hover:border-5 hover:shadow-[0_30px_80px_rgba(0,0,0,0.50)]"
+    >
+      <img
+        src={avatar.src}
+        alt="Felipe Lucas"
+        class="block h-full w-full object-cover scale-110"
+      />
+    </div>
+  </div>
+</section>

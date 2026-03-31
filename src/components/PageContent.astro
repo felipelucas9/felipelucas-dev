@@ -1,0 +1,19 @@
+---
+import Hero from "./sections/Hero.astro";
+import About from "./sections/About.astro";
+import Skills from "./sections/Skills.astro";
+import Projects from "./sections/Projects.astro";
+import Services from "./sections/Services.astro";
+import Footer from "./sections/Footer.astro";
+
+const { t } = Astro.props;
+---
+
+<main class="pt-16 md:pt-20">
+  <Hero t={t} />
+  <About t={t} />
+  <Skills t={t} />
+  <Projects t={t} />
+  <Services t={t} />
+  <Footer t={t} />
+</main>

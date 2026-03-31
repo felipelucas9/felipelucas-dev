@@ -1,0 +1,67 @@
+---
+import Container from "../ui/Container.astro";
+import ContactBox from "./ContactBox.astro";
+
+import {
+  PanelsTopLeft,
+  Building2,
+  LayoutPanelTop,
+  FileCode2,
+  Figma,
+  PanelsLeftBottom,
+} from "lucide-astro";
+
+const { t } = Astro.props;
+
+const icons = [
+  PanelsTopLeft,
+  Building2,
+  LayoutPanelTop,
+  FileCode2,
+  Figma,
+  PanelsLeftBottom,
+];
+---
+
+<section
+  id="services"
+  class="relative bg-[var(--color-secondary)] py-24 pb-40 text-white md:pb-48"
+>
+  <Container>
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-bold sm:text-4xl">
+        {t.services.title}
+      </h2>
+
+      <p class="mt-5 text-base leading-8 text-white/85 sm:text-lg">
+        {t.services.description}
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-y-12 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        t.services.items.map((item, index) => {
+          const Icon = icons[index];
+
+          return (
+            <article class="service-item flex flex-col items-center text-center reveal">
+              <div class="service-circle flex h-20 w-20 items-center justify-center rounded-full bg-[var(--color-contrast)]">
+                <Icon class="service-icon text-white" size={34} />
+              </div>
+
+              <h3 class="mt-5 text-lg font-semibold text-white">
+                {item.title}
+              </h3>
+
+              <p class="mt-3 max-w-[28ch] text-sm leading-7 text-white/80">
+                {item.description}
+              </p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </Container>
+
+  <ContactBox t={t} />
+</section>

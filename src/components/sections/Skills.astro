@@ -1,0 +1,151 @@
+---
+import Container from "../ui/Container.astro";
+import { PaintbrushVertical, FileCode, Rocket } from "lucide-astro";
+
+const { t } = Astro.props;
+---
+
+<section id="skills" class="pb-0">
+  <div class="h-24 bg-[var(--color-primary)]"></div>
+
+  <div class="bg-[var(--color-bg)] pb-24">
+    <Container>
+      <div class="grid -translate-y-24 gap-6 lg:grid-cols-3">
+        <!-- CARD 1 - DESIGNER -->
+        <article
+          class="reveal reveal-delay-1 group card card-hover border-3 border-[var(--color-contrast)] hover:bg-[var(--color-contrast)]/10"
+        >
+          <div
+            class="card-header card-header-contrast group-hover:brightness-105"
+          >
+            <div
+              class="card-icon group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-xl"
+            >
+              <PaintbrushVertical size={42} />
+            </div>
+
+            <h3 class="text-2xl font-bold">{t.skills.designer.title}</h3>
+          </div>
+
+          <div class="card-body">
+            <p class="leading-8 text-[var(--color-text)]">
+              {t.skills.designer.desc}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.designer.label1}
+            </p>
+
+            <p class="mt-2 leading-8 text-[var(--color-text)]">
+              {t.skills.designer.text1}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.designer.label2}
+            </p>
+
+            <div class="mt-3">
+              {
+                t.skills.designer.text2.map((item) => (
+                  <span class="block leading-8 text-[var(--color-text)]">
+                    {item}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 2 - DEV -->
+        <article
+          class="reveal reveal-delay-2 group card card-hover border-3 border-[var(--color-contrast)] hover:bg-[var(--color-contrast)]/10"
+        >
+          <div
+            class="card-header card-header-contrast group-hover:brightness-105"
+          >
+            <div
+              class="card-icon group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-xl"
+            >
+              <FileCode size={42} />
+            </div>
+
+            <h3 class="text-2xl font-bold">{t.skills.dev.title}</h3>
+          </div>
+
+          <div class="card-body">
+            <p class="leading-8 text-[var(--color-text)]">
+              {t.skills.dev.desc}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.dev.label1}
+            </p>
+
+            <p class="mt-2 leading-8 text-[var(--color-text)]">
+              {t.skills.dev.text1}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.dev.label2}
+            </p>
+
+            <div class="mt-3">
+              {
+                t.skills.dev.text2.map((item) => (
+                  <span class="block leading-8 text-[var(--color-text)]">
+                    {item}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3 - STRATEGIST -->
+        <article
+          class="reveal reveal-delay-3 group card card-hover border-3 border-[var(--color-contrast)] hover:bg-[var(--color-contrast)]/10"
+        >
+          <div
+            class="card-header card-header-contrast group-hover:brightness-105"
+          >
+            <div
+              class="card-icon group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-xl"
+            >
+              <Rocket size={42} />
+            </div>
+
+            <h3 class="text-2xl font-bold">{t.skills.strategist.title}</h3>
+          </div>
+
+          <div class="card-body">
+            <p class="leading-8 text-[var(--color-text)]">
+              {t.skills.strategist.desc}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.strategist.label1}
+            </p>
+
+            <p class="mt-2 leading-8 text-[var(--color-text)]">
+              {t.skills.strategist.text1}
+            </p>
+
+            <p class="mt-6 text-lg font-medium text-[var(--color-accent)]">
+              {t.skills.strategist.label2}
+            </p>
+
+            <div class="mt-3">
+              {
+                t.skills.strategist.text2.map((item) => (
+                  <span class="block leading-8 text-[var(--color-text)]">
+                    {item}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </article>
+      </div>
+    </Container>
+  </div>
+</section>

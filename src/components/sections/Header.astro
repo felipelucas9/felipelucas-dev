@@ -1,0 +1,529 @@
+---
+import Container from "../ui/Container.astro";
+import logo from "../../assets/logo-felipelucasdev.svg";
+
+const { t, lang } = Astro.props;
+
+const ptHref = "/pt/";
+const enHref = "/";
+---
+
+<header data-header class="header-shell fixed inset-x-0 top-0 z-50">
+  <div data-header-inner class="header-inner bg-white/60 backdrop-blur">
+    <Container>
+      <div data-header-row class="header-row flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="inline-flex items-center">
+          <img
+            src={logo.src}
+            alt="Felipe Lucas Dev"
+            class="h-10 w-auto md:h-11"
+          />
+        </a>
+
+        <!-- Desktop nav -->
+        <div class="hidden items-center gap-8 md:flex">
+          <nav class="flex items-center gap-6">
+            <a
+              href="#about"
+              class="text-sm text-[var(--color-text)] transition duration-300 ease-out hover:text-[var(--color-accent)]"
+            >
+              {t.header.about}
+            </a>
+
+            <a
+              href="#skills"
+              class="text-sm text-[var(--color-text)] transition duration-300 ease-out hover:text-[var(--color-accent)]"
+            >
+              {t.header.skills}
+            </a>
+
+            <a
+              href="#projects"
+              class="text-sm text-[var(--color-text)] transition duration-300 ease-out hover:text-[var(--color-accent)]"
+            >
+              {t.header.projects}
+            </a>
+
+            <a
+              href="#services"
+              class="text-sm text-[var(--color-text)] transition duration-300 ease-out hover:text-[var(--color-accent)]"
+            >
+              {t.header.services}
+            </a>
+          </nav>
+
+          <!-- Desktop language switch -->
+          <div class="flex items-center gap-2">
+            <a
+              href={ptHref}
+              class:list={["lang-link", lang === "pt" && "is-active"]}
+              aria-label="Português"
+            >
+              <img
+                src="/icons/flag-bra.svg"
+                alt="Brazil Flag"
+                class:list={[
+                  "h-4 w-4 transition duration-300 ease-out",
+                  lang === "pt"
+                    ? "grayscale-0 opacity-100"
+                    : "grayscale opacity-70",
+                ]}
+              />
+              <span>PT</span>
+            </a>
+
+            <span class="text-[var(--color-text)]/30">|</span>
+
+            <a
+              href={enHref}
+              class:list={["lang-link", lang === "en" && "is-active"]}
+              aria-label="English"
+            >
+              <span>EN</span>
+              <img
+                src="/icons/flag-usa.svg"
+                alt="USA Flag"
+                class:list={[
+                  "h-4 w-4 transition duration-300 ease-out",
+                  lang === "en"
+                    ? "grayscale-0 opacity-100"
+                    : "grayscale opacity-70",
+                ]}
+              />
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile placeholder only -->
+        <div class="w-[42px] md:hidden"></div>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Mobile overlay -->
+  <div class="mobile-overlay md:hidden" data-mobile-overlay data-open="false">
+  </div>
+
+  <!-- Mobile side panel -->
+  <aside
+    id="mobile-menu"
+    data-mobile-menu
+    class="mobile-drawer md:hidden"
+    data-open="false"
+    aria-hidden="true"
+  >
+    <div class="mobile-drawer-inner">
+      <!-- Top row inside menu -->
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <a
+            href={ptHref}
+            class:list={["lang-link", lang === "pt" && "is-active"]}
+            aria-label="Português"
+          >
+            <img
+              src="/icons/flag-bra.svg"
+              alt="Brazil Flag"
+              class:list={[
+                "h-4 w-4 transition duration-300 ease-out",
+                lang === "pt"
+                  ? "grayscale-0 opacity-100"
+                  : "grayscale opacity-70",
+              ]}
+            />
+            <span>PT</span>
+          </a>
+
+          <span class="text-[var(--color-text)]/30">|</span>
+
+          <a
+            href={enHref}
+            class:list={["lang-link", lang === "en" && "is-active"]}
+            aria-label="English"
+          >
+            <span>EN</span>
+            <img
+              src="/icons/flag-usa.svg"
+              alt="USA Flag"
+              class:list={[
+                "h-4 w-4 transition duration-300 ease-out",
+                lang === "en"
+                  ? "grayscale-0 opacity-100"
+                  : "grayscale opacity-70",
+              ]}
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="mt-10 flex flex-col gap-6">
+        <a href="#about" class="mobile-nav-link" data-mobile-link>
+          {t.header.about}
+        </a>
+
+        <a href="#skills" class="mobile-nav-link" data-mobile-link>
+          {t.header.skills}
+        </a>
+
+        <a href="#projects" class="mobile-nav-link" data-mobile-link>
+          {t.header.projects}
+        </a>
+
+        <a href="#services" class="mobile-nav-link" data-mobile-link>
+          {t.header.services}
+        </a>
+      </nav>
+    </div>
+  </aside>
+  <!-- Floating mobile toggle -->
+  <button
+    type="button"
+    class="mobile-toggle-floating md:hidden"
+    data-menu-toggle
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <span class="mobile-toggle-line top"></span>
+    <span class="mobile-toggle-line middle"></span>
+    <span class="mobile-toggle-line bottom"></span>
+  </button>
+</header>
+
+<style>
+  .header-shell {
+    transform: translateY(0);
+    transition: transform 0.35s ease;
+  }
+
+  .header-shell.is-hidden {
+    transform: translateY(calc(-100% - 8px));
+  }
+
+  .header-inner {
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .header-row {
+    height: 64px;
+    transition: height 0.3s ease;
+  }
+
+  .header-shell.is-scrolled .header-inner {
+    border-color: rgb(0 0 0 / 0.06);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.08);
+  }
+
+  .header-shell.is-scrolled .header-row {
+    height: 56px;
+  }
+
+  @media (min-width: 768px) {
+    .header-row {
+      height: 80px;
+    }
+
+    .header-shell.is-scrolled .header-row {
+      height: 64px;
+    }
+  }
+
+  .lang-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: rgb(82 82 82 / 0.8);
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .lang-link:hover {
+    color: var(--color-accent);
+    transform: translateY(-1px);
+  }
+
+  .lang-link.is-active {
+    color: var(--color-accent);
+  }
+
+  .mobile-toggle-floating {
+    position: fixed;
+    top: 11px;
+    right: 20px;
+    z-index: 90;
+    height: 42px;
+    width: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--color-primary);
+    transition:
+      transform 0.45s ease,
+      box-shadow 0.45s ease,
+      border-color 0.45s ease,
+      color 0.45s ease,
+      top 0.45s ease;
+  }
+
+  .header-shell.is-scrolled .mobile-toggle-floating {
+    top: 7px;
+  }
+
+  .mobile-toggle-floating.is-open {
+    color: var(--color-accent);
+  }
+
+  .mobile-toggle-line {
+    position: absolute;
+    width: 17px;
+    height: 2px;
+    border-radius: 9999px;
+    background: currentColor;
+    transition:
+      transform 0.35s ease,
+      opacity 0.25s ease,
+      top 0.35s ease;
+  }
+
+  .mobile-toggle-line.top {
+    top: 14px;
+  }
+
+  .mobile-toggle-line.middle {
+    top: 20px;
+  }
+
+  .mobile-toggle-line.bottom {
+    top: 26px;
+  }
+
+  .mobile-toggle-floating.is-open .mobile-toggle-line.top {
+    top: 20px;
+    transform: rotate(45deg);
+  }
+
+  .mobile-toggle-floating.is-open .mobile-toggle-line.middle {
+    opacity: 0;
+  }
+
+  .mobile-toggle-floating.is-open .mobile-toggle-line.bottom {
+    top: 20px;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgb(0 0 0 / 0.18);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.45s ease,
+      visibility 0.45s ease;
+  }
+
+  .mobile-overlay[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 65;
+    height: 100dvh;
+    width: 85vw;
+    max-width: 420px;
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.06s;
+    pointer-events: none;
+  }
+
+  .mobile-drawer[data-open="true"] {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .mobile-drawer-inner {
+    height: 100%;
+    padding: 1.5rem 1.25rem 2rem;
+    background: rgb(255 255 255 / 0.96);
+    backdrop-filter: blur(14px);
+    box-shadow: -24px 0 60px rgb(0 0 0 / 0.2);
+    border-left: 1px solid rgb(0 0 0 / 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav-link {
+    color: var(--color-text-title);
+    font-size: 1.1rem;
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-accent);
+    transform: translateX(2px);
+  }
+</style>
+
+<script is:inline>
+  const header = document.querySelector("[data-header]");
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+  const mobileOverlay = document.querySelector("[data-mobile-overlay]");
+  const mobileLinks = document.querySelectorAll("[data-mobile-link]");
+
+  let lastScrollY = window.scrollY;
+
+  const closeMenu = () => {
+    if (!menuToggle || !mobileMenu || !mobileOverlay) return;
+
+    menuToggle.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("data-open", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    mobileOverlay.setAttribute("data-open", "false");
+    document.body.style.overflow = "";
+  };
+
+  const openMenu = () => {
+    if (!menuToggle || !mobileMenu || !mobileOverlay) return;
+
+    menuToggle.classList.add("is-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    mobileMenu.setAttribute("data-open", "true");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    mobileOverlay.setAttribute("data-open", "true");
+    document.body.style.overflow = "hidden";
+  };
+
+  const toggleMenu = () => {
+    if (!mobileMenu) return;
+
+    const isOpen = mobileMenu.getAttribute("data-open") === "true";
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
+
+  const updateHeader = () => {
+    const currentScrollY = window.scrollY;
+
+    if (!header) return;
+
+    if (currentScrollY > 24) {
+      header.classList.add("is-scrolled");
+    } else {
+      header.classList.remove("is-scrolled");
+    }
+
+    const menuOpen = mobileMenu?.getAttribute("data-open") === "true";
+
+    if (menuOpen) {
+      header.classList.remove("is-hidden");
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (currentScrollY <= 24) {
+      header.classList.remove("is-hidden");
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (currentScrollY > lastScrollY && currentScrollY > 120) {
+      header.classList.add("is-hidden");
+    } else {
+      header.classList.remove("is-hidden");
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  menuToggle?.addEventListener("click", toggleMenu);
+  mobileOverlay?.addEventListener("click", closeMenu);
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      closeMenu();
+    }
+  });
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  //SMOOTHER SCROLL
+  const easeInOutCubic = (t) => {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  };
+
+  const smoothScrollTo = (targetY, duration = 900) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const eased = easeInOutCubic(progress);
+
+      window.scrollTo(0, startY + distance * eased);
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  const scrollWithDelay = (targetY, delay = 80, duration = 900) => {
+    setTimeout(() => {
+      smoothScrollTo(targetY, duration);
+    }, delay);
+  };
+
+  // intercepta links âncora
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+
+      const headerOffset = 64; // ajuste conforme seu header
+      const targetY =
+        target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      scrollWithDelay(targetY, 80, 900);
+    });
+  });
+</script>

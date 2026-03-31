@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/sections/Header.astro";
+import PageContent from "../../components/PageContent.astro";
+import ContactFormPanel from "../../components/ContactFormPanel.astro";
+
+import pt from "../../data/i18n/pt";
+
+const lang = "pt";
+const t = pt;
+---
+
+<BaseLayout>
+  <Header t={t} lang={lang} />
+  <PageContent t={t} />
+  <ContactFormPanel t={t} />
+</BaseLayout>

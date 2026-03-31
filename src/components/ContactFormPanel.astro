@@ -1,0 +1,124 @@
+---
+const { t } = Astro.props;
+---
+
+<section
+  data-contact-panel
+  class="contact-panel"
+  data-open="false"
+  aria-hidden="true"
+>
+  <div class="contact-overlay" data-contact-overlay data-open="false"></div>
+
+  <div class="contact-panel-shell">
+    <div class="contact-panel-inner">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="text-2xl font-bold text-white sm:text-3xl">
+          {t.contactForm.title}
+        </h2>
+
+        <button
+          type="button"
+          class="contact-close"
+          data-contact-close
+          aria-label="Close contact form"
+        >
+          <span class="contact-close-line top"></span>
+          <span class="contact-close-line bottom"></span>
+        </button>
+      </div>
+
+      <p class="mt-4 max-w-2xl text-sm leading-7 text-white/85 sm:text-base">
+        {t.contactForm.description}
+      </p>
+
+      <form
+        method="POST"
+        action="https://formspree.io/f/xbdpyyny"
+        class="mt-8"
+        data-contact-form
+        data-success={t.contactForm.success}
+        data-error={t.contactForm.error}
+        data-error-network={t.contactForm.errorNetwork}
+      >
+        <input
+          type="hidden"
+          name="_subject"
+          value="felipelucas.dev - New message from portfolio"
+        />
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label
+              for="name"
+              class="mb-2 block text-sm font-medium text-white/90"
+            >
+              {t.contactForm.fieldName}
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              class="contact-field"
+              placeholder={t.contactForm.fieldNamePlaceholder}
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              for="email"
+              class="mb-2 block text-sm font-medium text-white/90"
+            >
+              {t.contactForm.fieldEmail}
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="contact-field"
+              placeholder={t.contactForm.fieldEmailPlaceholder}
+              required
+            />
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <label
+            for="message"
+            class="mb-2 block text-sm font-medium text-white/90"
+          >
+            {t.contactForm.fieldText}
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            class="contact-field resize-none"
+            placeholder={t.contactForm.fieldTextPlaceholder}
+            required></textarea>
+        </div>
+
+        <div
+          class="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <p
+            class="min-h-[24px] text-sm text-white/85"
+            data-contact-feedback
+            aria-live="polite"
+          >
+          </p>
+
+          <button
+            type="submit"
+            class="contact-submit"
+            data-contact-submit
+            data-sending={t.contactForm.sending}
+          >
+            {t.contactForm.submit}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
