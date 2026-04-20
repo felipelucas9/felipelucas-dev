@@ -1,0 +1,628 @@
+---
+// HeroAnimation.astro — Decorative floating elements, light theme for white hero
+---
+
+<div class="ha-root" aria-hidden="true">
+  <!-- Laptop — left side -->
+  <div class="ha-device ha-laptop">
+    <div class="ha-laptop-screen">
+      <div class="ha-dots">
+        <span class="ha-dot ha-dot-red"></span>
+        <span class="ha-dot ha-dot-yellow"></span>
+        <span class="ha-dot ha-dot-green"></span>
+      </div>
+      <div class="ha-code-lines">
+        <div
+          class="ha-code-line"
+          style="width:72%;background:rgba(129,0,209,0.25)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:48%;background:rgba(255,82,160,0.22)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:80%;background:rgba(129,0,209,0.18)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:38%;background:rgba(255,164,127,0.28)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:60%;background:rgba(129,0,209,0.2)"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="ha-laptop-base"></div>
+  </div>
+
+  <!-- Phone — right side -->
+  <div class="ha-device ha-phone">
+    <div class="ha-phone-notch"></div>
+    <div class="ha-phone-header"></div>
+    <div class="ha-phone-line"></div>
+    <div class="ha-phone-line ha-phone-line-short"></div>
+    <div class="ha-phone-icons">
+      <span class="ha-phone-icon ha-icon-purple"></span>
+      <span class="ha-phone-icon ha-icon-pink"></span>
+      <span class="ha-phone-icon ha-icon-orange"></span>
+    </div>
+    <div class="ha-phone-home"></div>
+  </div>
+
+  <!-- Tablet — bottom left -->
+  <div class="ha-device ha-tablet">
+    <div class="ha-tablet-cards">
+      <div class="ha-tablet-card ha-tablet-card-a"></div>
+      <div class="ha-tablet-card ha-tablet-card-b"></div>
+    </div>
+    <div class="ha-tablet-lines">
+      <div class="ha-tablet-line" style="width:80%"></div>
+      <div class="ha-tablet-line" style="width:55%"></div>
+    </div>
+  </div>
+
+  <!-- Floating HTML tags -->
+  <span class="ha-tag ha-tag-1">&lt;div&gt;</span>
+  <span class="ha-tag ha-tag-2">&lt;h1&gt;</span>
+  <span class="ha-tag ha-tag-3">&lt;/section&gt;</span>
+  <span class="ha-tag ha-tag-4">&lt;img /&gt;</span>
+  <span class="ha-tag ha-tag-5 ha-tag-orange">&#123; props &#125;</span>
+  <span class="ha-tag ha-tag-6 ha-tag-pink">&lt;App /&gt;</span>
+
+  <!-- Laptop mobile — bottom left, only visible on mobile -->
+  <div class="ha-device ha-laptop-mobile">
+    <div class="ha-laptop-screen">
+      <div class="ha-dots">
+        <span class="ha-dot ha-dot-red"></span>
+        <span class="ha-dot ha-dot-yellow"></span>
+        <span class="ha-dot ha-dot-green"></span>
+      </div>
+      <div class="ha-code-lines">
+        <div
+          class="ha-code-line"
+          style="width:72%;background:rgba(129,0,209,0.25)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:48%;background:rgba(255,82,160,0.22)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:80%;background:rgba(129,0,209,0.18)"
+        >
+        </div>
+        <div
+          class="ha-code-line"
+          style="width:38%;background:rgba(255,164,127,0.28)"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="ha-laptop-base"></div>
+  </div>
+
+  <!-- Phone mobile — bottom right, only visible on mobile -->
+  <div class="ha-device ha-phone-mobile">
+    <div class="ha-phone-notch"></div>
+    <div class="ha-phone-header"></div>
+    <div class="ha-phone-line"></div>
+    <div class="ha-phone-line ha-phone-line-short"></div>
+    <div class="ha-phone-icons">
+      <span class="ha-phone-icon ha-icon-purple"></span>
+      <span class="ha-phone-icon ha-icon-pink"></span>
+      <span class="ha-phone-icon ha-icon-orange"></span>
+    </div>
+    <div class="ha-phone-home"></div>
+  </div>
+
+  <!-- Cursor decoration -->
+  <div class="ha-cursor">
+    <svg
+      width="16"
+      height="20"
+      viewBox="0 0 20 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 2L16 12L10 13L13 22L10 23L7 14L2 18L4 2Z"
+        fill="rgba(129,0,209,0.15)"
+        stroke="rgba(129,0,209,0.6)"
+        stroke-width="1.5"></path>
+    </svg>
+    <span class="ha-cursor-label">click</span>
+  </div>
+</div>
+
+<style>
+  /* ── Root: transparent overlay filling the hero section ─── */
+  .ha-root {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  /* ── Device shared base ─────────────────────────────────── */
+  .ha-device {
+    position: absolute;
+    will-change: transform;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* ── Laptop ─────────────────────────────────────────────── */
+  .ha-laptop {
+    top: 60px;
+    left: 28px;
+    width: 142px;
+    background: transparent;
+    animation: ha-float-a 6s ease-in-out infinite;
+    transform: perspective(600px) rotateX(8deg) rotateY(-10deg);
+  }
+
+  .ha-laptop-screen {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1.5px solid rgba(129, 0, 209, 0.2);
+    border-radius: 8px 8px 0 0;
+    padding: 10px 10px 12px;
+    box-shadow:
+      0 4px 24px rgba(129, 0, 209, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .ha-dots {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+
+  .ha-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .ha-dot-red {
+    background: #ff5f57;
+  }
+  .ha-dot-yellow {
+    background: #febc2e;
+  }
+  .ha-dot-green {
+    background: #28c840;
+  }
+
+  .ha-code-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ha-code-line {
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .ha-laptop-base {
+    background: rgba(245, 240, 255, 0.8);
+    border: 1.5px solid rgba(129, 0, 209, 0.15);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    height: 9px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ── Phone ──────────────────────────────────────────────── */
+  .ha-phone {
+    top: 48px;
+    right: 28px;
+    width: 68px;
+    min-height: 124px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1.5px solid rgba(255, 82, 160, 0.25);
+    border-radius: 14px;
+    padding: 12px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: ha-float-b 7s ease-in-out infinite;
+    box-shadow:
+      0 4px 24px rgba(255, 82, 160, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .ha-phone-notch {
+    width: 22px;
+    height: 5px;
+    background: rgba(255, 82, 160, 0.35);
+    border-radius: 3px;
+    margin-bottom: 4px;
+  }
+
+  .ha-phone-header {
+    width: 100%;
+    height: 16px;
+    background: rgba(129, 0, 209, 0.15);
+    border-radius: 5px;
+  }
+
+  .ha-phone-line {
+    width: 90%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+  }
+
+  .ha-phone-line-short {
+    width: 65%;
+  }
+
+  .ha-phone-icons {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+  }
+
+  .ha-phone-icon {
+    width: 13px;
+    height: 13px;
+    border-radius: 3px;
+  }
+
+  .ha-icon-purple {
+    background: rgba(129, 0, 209, 0.35);
+  }
+  .ha-icon-pink {
+    background: rgba(255, 82, 160, 0.35);
+  }
+  .ha-icon-orange {
+    background: rgba(255, 164, 127, 0.45);
+  }
+
+  .ha-phone-home {
+    width: 26px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    margin-top: auto;
+  }
+
+  /* ── Tablet ─────────────────────────────────────────────── */
+  .ha-tablet {
+    bottom: 100px;
+    left: 28px;
+    width: 170px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1.5px solid rgba(255, 164, 127, 0.28);
+    border-radius: 12px;
+    padding: 12px;
+    animation: ha-float-c 8s ease-in-out infinite;
+    box-shadow:
+      0 4px 24px rgba(255, 164, 127, 0.12),
+      0 1px 3px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .ha-tablet-cards {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .ha-tablet-card {
+    flex: 1;
+    height: 38px;
+    border-radius: 6px;
+  }
+
+  .ha-tablet-card-a {
+    background: rgba(129, 0, 209, 0.18);
+  }
+  .ha-tablet-card-b {
+    background: rgba(255, 82, 160, 0.15);
+  }
+
+  .ha-tablet-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ha-tablet-line {
+    height: 4px;
+    background: rgba(255, 164, 127, 0.3);
+    border-radius: 2px;
+  }
+
+  /* ── Float keyframes ────────────────────────────────────── */
+  @keyframes ha-float-a {
+    0%,
+    100% {
+      transform: perspective(600px) rotateX(8deg) rotateY(-10deg)
+        translateY(0px);
+    }
+    50% {
+      transform: perspective(600px) rotateX(8deg) rotateY(-10deg)
+        translateY(-10px);
+    }
+  }
+
+  @keyframes ha-float-b {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes ha-float-c {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  /* ── HTML Tags ──────────────────────────────────────────── */
+  .ha-tag {
+    position: absolute;
+    font-family: monospace;
+    font-size: 12px;
+    color: rgba(101, 53, 133, 0.85);
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(129, 0, 209, 0.18);
+    border-radius: 5px;
+    padding: 2px 7px;
+    will-change: transform;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(129, 0, 209, 0.08);
+  }
+
+  .ha-tag-orange {
+    color: rgba(180, 80, 0, 0.85);
+    border-color: rgba(255, 164, 127, 0.28);
+  }
+
+  .ha-tag-pink {
+    color: rgba(180, 0, 100, 0.85);
+    border-color: rgba(255, 82, 160, 0.22);
+  }
+
+  /* Spread tags away from the center text column */
+  .ha-tag-1 {
+    top: 10%;
+    left: 20%;
+    animation: ha-tag-float-1 5.2s ease-in-out infinite;
+  }
+  .ha-tag-2 {
+    top: 48%;
+    left: 6%;
+    animation: ha-tag-float-2 6.1s ease-in-out infinite 0.4s;
+  }
+  .ha-tag-3 {
+    top: 14%;
+    right: 18%;
+    animation: ha-tag-float-3 5.7s ease-in-out infinite 1.1s;
+  }
+  .ha-tag-4 {
+    top: 52%;
+    right: 6%;
+    animation: ha-tag-float-4 6.8s ease-in-out infinite 0.7s;
+  }
+  .ha-tag-5 {
+    bottom: 22%;
+    left: 22%;
+    animation: ha-tag-float-5 5.5s ease-in-out infinite 0.2s;
+  }
+  .ha-tag-6 {
+    bottom: 26%;
+    right: 18%;
+    animation: ha-tag-float-6 7.5s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes ha-tag-float-1 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(1deg);
+    }
+  }
+  @keyframes ha-tag-float-2 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(1deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(-1deg);
+    }
+  }
+  @keyframes ha-tag-float-3 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-7px) rotate(2deg);
+    }
+  }
+  @keyframes ha-tag-float-4 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(2deg);
+    }
+    50% {
+      transform: translateY(-9px) rotate(-2deg);
+    }
+  }
+  @keyframes ha-tag-float-5 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(1deg);
+    }
+  }
+  @keyframes ha-tag-float-6 {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(1deg);
+    }
+    50% {
+      transform: translateY(-11px) rotate(-1deg);
+    }
+  }
+
+  /* ── Cursor ─────────────────────────────────────────────── */
+  .ha-cursor {
+    position: absolute;
+    bottom: 90px;
+    right: 28px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .ha-cursor-label {
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(101, 53, 133, 0.8);
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(129, 0, 209, 0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    margin-bottom: 2px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 6px rgba(129, 0, 209, 0.08);
+  }
+
+  /* ── Laptop mobile-only (hidden on desktop) ─────────────── */
+  .ha-laptop-mobile {
+    display: none;
+    bottom: 90px;
+    left: 30px;
+    width: 120px;
+    background: transparent;
+    animation: ha-float-a 6.5s ease-in-out infinite 0.3s;
+    transform: perspective(600px) rotateX(8deg) rotateY(-10deg);
+  }
+
+  /* ── Phone mobile-only (hidden on desktop) ─────────────── */
+  .ha-phone-mobile {
+    display: none;
+    bottom: 80px;
+    right: 50px;
+    left: auto;
+    transform: none;
+    width: 62px;
+    min-height: 116px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1.5px solid rgba(129, 0, 209, 0.25);
+    border-radius: 14px;
+    padding: 12px 8px 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: ha-float-b 7s ease-in-out infinite 0.8s;
+    box-shadow:
+      0 4px 24px rgba(129, 0, 209, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* ── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .ha-laptop,
+    .ha-tablet {
+      display: none;
+    }
+
+    .ha-phone {
+      top: 32px;
+      right: 10px;
+      width: 58px;
+      min-height: 108px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ha-phone,
+    .ha-tag-5,
+    .ha-tag-6,
+    .ha-cursor {
+      display: none;
+    }
+
+    .ha-phone-mobile {
+      display: flex;
+    }
+
+    .ha-laptop-mobile {
+      display: block;
+    }
+
+    .ha-tag-1 {
+      top: 6%;
+      left: 4%;
+    }
+    .ha-tag-2 {
+      bottom: 72px;
+      left: 4%;
+    }
+    .ha-tag-3 {
+      top: 6%;
+      right: 4%;
+    }
+    .ha-tag-4 {
+      bottom: 72px;
+      right: 4%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ha-tag-2,
+    .ha-tag-4 {
+      display: none;
+    }
+  }
+
+  /* ── Reduced motion ─────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .ha-device,
+    .ha-tag {
+      animation: none !important;
+    }
+
+    .ha-laptop {
+      transform: perspective(600px) rotateX(8deg) rotateY(-10deg);
+    }
+  }
+</style>
