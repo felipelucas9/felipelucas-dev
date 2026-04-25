@@ -4,7 +4,7 @@
 
 <div class="ha-root" aria-hidden="true">
   <!-- Laptop — left side -->
-  <div class="ha-device ha-laptop">
+  <div class="ha-device ha-laptop" data-parallax-speed="0.08">
     <div
       class="ha-laptop-screen"
       style="background:#462C7D;border:2px solid #b500b2;box-shadow:0 6px 28px rgba(181,0,178,0.5)"
@@ -36,6 +36,7 @@
   <!-- Phone — right side -->
   <div
     class="ha-device ha-phone"
+    data-parallax-speed="0.14"
     style="background:#b500b2;border:2px solid #462C7D;box-shadow:0 6px 28px rgba(116, 8, 249, 0.458)"
   >
     <div class="ha-phone-notch" style="background:rgba(255, 255, 255, 0.859)">
@@ -59,6 +60,7 @@
   <!-- Tablet — bottom left -->
   <div
     class="ha-device ha-tablet"
+    data-parallax-speed="0.06"
     style="background:#462C7D;border:2px solid #9FFF7C;box-shadow:0 6px 28px rgba(83, 228, 91, 0.5)"
   >
     <div class="ha-tablet-cards">
@@ -83,36 +85,42 @@
   <span
     class="ha-tag ha-tag-1"
     style="background:#ff52a0;color:#fff;box-shadow:0 3px 14px rgba(255,82,160,0.5)"
+    data-parallax-speed="0.18"
     >&lt;div&gt;</span
   >
   <span
     class="ha-tag ha-tag-2"
     style="background:#b500b2;color:#fff;box-shadow:0 3px 14px rgba(181,0,178,0.5)"
+    data-parallax-speed="0.10"
     >&lt;h1&gt;</span
   >
   <span
     class="ha-tag ha-tag-3"
     style="background:#9FFF7C;color:#1a4a00;box-shadow:0 3px 14px rgba(83, 228, 91, 0.5)"
+    data-parallax-speed="0.22"
     >&lt;/section&gt;</span
   >
   <span
     class="ha-tag ha-tag-4"
     style="background:#462C7D;color:#fff;box-shadow:0 3px 14px rgba(70,44,125,0.5)"
+    data-parallax-speed="0.12"
     >&lt;img /&gt;</span
   >
   <span
     class="ha-tag ha-tag-5"
     style="background:#9FFF7C;color:#1a4a00;box-shadow:0 3px 14px rgba(83, 228, 91, 0.5)"
+    data-parallax-speed="0.08"
     >&#123; props &#125;</span
   >
   <span
     class="ha-tag ha-tag-6"
     style="background:#ff52a0;color:#fff;box-shadow:0 3px 14px rgba(255,82,160,0.5)"
+    data-parallax-speed="0.20"
     >&lt;App /&gt;</span
   >
 
   <!-- Laptop mobile — bottom left, only visible on mobile -->
-  <div class="ha-device ha-laptop-mobile">
+  <div class="ha-device ha-laptop-mobile" data-parallax-speed="0.08">
     <div
       class="ha-laptop-screen"
       style="background:#462C7D;border:2px solid #b500b2;box-shadow:0 6px 28px rgba(235, 13, 231, 0.819)"
@@ -143,6 +151,7 @@
   <!-- Phone mobile — bottom right, only visible on mobile -->
   <div
     class="ha-device ha-phone-mobile"
+    data-parallax-speed="0.14"
     style="background:#462C7D;border:2px solid #9FFF7C;box-shadow:0 6px 24px rgba(83, 228, 91, 0.5)"
   >
     <div class="ha-phone-notch" style="background:rgba(159,255,124,0.5)"></div>
@@ -163,7 +172,7 @@
   </div>
 
   <!-- Cursor decoration -->
-  <div class="ha-cursor">
+  <div class="ha-cursor" data-parallax-speed="0.16">
     <svg
       width="16"
       height="20"
@@ -575,3 +584,37 @@
     }
   }
 </style>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReducedMotion) {
+    const parallaxEls = document.querySelectorAll<HTMLElement>(
+      "[data-parallax-speed]"
+    );
+
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      parallaxEls.forEach((el) => {
+        const speed = parseFloat(el.dataset.parallaxSpeed ?? "0");
+        el.style.translate = `0 ${-scrollY * speed}px`;
+      });
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+</script>
